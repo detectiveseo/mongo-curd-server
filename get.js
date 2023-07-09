@@ -1,6 +1,5 @@
 module.exports = get = (app, InfoCollection) => {
     app.get("/users", async (req, res) => {
-        console.log(req.query)
         const page = parseInt(req.query.page) || 1;
         const itemsLimit = parseInt(req.query.items) || 6;
         const skip = (page - 1) * itemsLimit;
@@ -8,8 +7,9 @@ module.exports = get = (app, InfoCollection) => {
         res.send(result);
     })
 
-    app.get("/total-items", async(req, res) => {
+    app.get("/total-items", async (req, res) => {
         const result = await InfoCollection.estimatedDocumentCount();
-        res.send({totalItems: result});
+        res.send({ totalItems: result });
     })
+  
 }
